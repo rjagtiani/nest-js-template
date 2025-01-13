@@ -1,0 +1,15 @@
+services:
+  service-dev:
+    container_name: my-service-dev
+    restart: unless-stopped
+    env_file: .env
+    build:
+      target: dev
+      context: .
+      args:
+        - PORT=${PORT:-3000}
+    ports:
+      - "${PORT:-3000}:${PORT:-3000}"
+      - "9229:9229"
+    volumes:
+      - ./src:/app/src
