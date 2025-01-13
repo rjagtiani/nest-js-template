@@ -1,22 +1,20 @@
-FROM node:22.12.0-slim
+ARG NODE_VERSION
 
-# Create app directory
-WORKDIR /usr/src/app
+FROM node:${NODE_VERSION}-alpine as base
+WORKDIR /opt/app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+FROM base as dependencies
+COPY package.json package-lock.json ./
+RUN npm ci --production
 
-# Install app dependencies
-RUN npm ci
+FROM base
+ARG START_CMD
+ENV START_CMD ${START_CMD}
 
-# Bundle app source
-COPY . .
+RUN apk add --update --no-cache tini
 
-# Build the TypeScript files
-RUN npm run build
+USER node:node
+COPY --chown=node:node . ./
+COPY --from=dependencies --chown=node:node /opt/app/node_modules ./node_modules
 
-# Expose port 8080
-EXPOSE 8080
-
-# Start the app
-CMD npm run start
+CMD /sbin/tini -- $START_CMD

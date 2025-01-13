@@ -1,15 +1,16 @@
 services:
-  service-dev:
-    container_name: my-service-dev
+  service-api:
+    container_name: service-api
     restart: unless-stopped
     env_file: .env
     build:
-      target: dev
       context: .
       args:
+        - NODE_VERSION=${NODE_VERSION:-22.12.0}
         - PORT=${PORT:-3000}
+    command: npm run start:api:dev
     ports:
       - "${PORT:-3000}:${PORT:-3000}"
       - "9229:9229"
     volumes:
-      - ./src:/app/src
+      - ./:/app
