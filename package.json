@@ -53,7 +53,7 @@
     "@types/node": "^22.13.8",
     "@types/supertest": "^6.0.2",
     "@typescript-eslint/eslint-plugin": "^8.26.0",
-    "@typescript-eslint/parser": "^8.25.0",
+    "@typescript-eslint/parser": "^8.26.0",
     "dotenv": "^16.4.5",
     "eslint": "^9.21.0",
     "eslint-import-resolver-typescript": "^3.8.3",
