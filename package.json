@@ -31,7 +31,7 @@
     "test:lint:fix": "eslint --max-warnings 0 --fix"
   },
   "dependencies": {
-    "@nestjs/cli": "^11.0.6",
+    "@nestjs/cli": "^11.0.7",
     "@nestjs/common": "^11.1.0",
     "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.1.0",
